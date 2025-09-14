@@ -1,13 +1,7 @@
 import datetime
 from enum import Enum
-from typing import List, Dict, Optional, Tuple
+from typing import Optional
 
-# FIle này chứa:
-# class Task:
-#     
-
-
-# --- Enum và Type Hints ---
 
 class Priority(Enum):
     LOW = 1
@@ -51,6 +45,3 @@ class TimeSlot:
 
     def __repr__(self) -> str:
         return f"TimeSlot(start='{self.start.strftime('%H:%M')}', end='{self.end.strftime('%H:%M')}', duration={self.duration_minutes}min)"
-
-
-

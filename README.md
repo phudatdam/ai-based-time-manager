@@ -6,8 +6,7 @@
 
 ## Setting
 
-
-1. **CLone code về máy cá nhân**
+1. **Clone code về máy cá nhân**
    
     ```bash
     git clone https://github.com/deanzedd/ai-based-time-manager.git
@@ -17,7 +16,7 @@
     ```bash
     git clone https://github.com/phudatdam/ai-based-time-manager.git
 
-1. **Chạy thử file `main.py`:**
+1. **Chạy thử file `test.sh`:**
    
     ```bash
     bash scripts/test.sh
