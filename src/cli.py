@@ -1,12 +1,12 @@
 import datetime
-from src.scheduler.AIScheduler import AIScheduler
+from src.scheduler.GreedyScheduler import GreedyScheduler
 from src.utils.parser import parse_args, parse_tasks
 
 
 def run_cli():
     # Parse scheduling settings from CLI args
     scheduler_settings = parse_args()
-    scheduler = AIScheduler(settings=scheduler_settings)
+    scheduler = GreedyScheduler(settings=scheduler_settings)
 
     # Input tasks interactively or from file
     print("Enter tasks:")

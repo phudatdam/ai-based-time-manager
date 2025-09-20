@@ -75,3 +75,37 @@ class CalendarManager:
                 slots.append(TimeSlot(current_time, next_time))
             current_time = next_time
         return slots
+
+    def get_available_intervals(self, start_time: datetime.datetime, end_time: datetime.datetime, tasks_scheduled_today: List[Task]) -> List[TimeSlot]:
+        """
+        Trả về tất cả các khoảng liên tục còn trống giữa các task đã lên lịch, trong giờ làm việc.
+        """
+        intervals = []
+        # Sắp xếp các task đã lên lịch theo thời gian bắt đầu
+        scheduled = [t for t in tasks_scheduled_today if t.scheduled_start and t.scheduled_end]
+        scheduled.sort(key=lambda t: t.scheduled_start)
+        cursor = start_time.replace(hour=self.work_start_hour, minute=0, second=0, microsecond=0)
+        work_end = start_time.replace(hour=self.work_end_hour, minute=0, second=0, microsecond=0)
+        for task in scheduled:
+            if cursor < task.scheduled_start:
+                interval_end = min(task.scheduled_start, work_end)
+                if cursor < interval_end:
+                    intervals.append(TimeSlot(cursor, interval_end))
+            cursor = max(cursor, task.scheduled_end)
+        if cursor < work_end:
+            intervals.append(TimeSlot(cursor, work_end))
+        return intervals
+
+    def generate_sub_intervals(self, interval: TimeSlot, duration_minutes: int, stride_minutes: int = 15) -> List[TimeSlot]:
+        """
+        Sinh ra các sub-intervals (cửa sổ) có độ dài duration_minutes, trượt stride_minutes trong interval.
+        """
+        sub_intervals = []
+        start = interval.start
+        latest_start = interval.end - datetime.timedelta(minutes=duration_minutes)
+        while start <= latest_start:
+            end = start + datetime.timedelta(minutes=duration_minutes)
+            if end <= interval.end:
+                sub_intervals.append(TimeSlot(start, end))
+            start += datetime.timedelta(minutes=stride_minutes)
+        return sub_intervals
