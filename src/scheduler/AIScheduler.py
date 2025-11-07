@@ -1,8 +1,8 @@
 import datetime
 from typing import List, Dict, Optional
 from src.models import Task, TimeSlot
-from src.scheduler.CalendarManager import CalendarManager
-from src.scheduler.SlotScorer import SlotScorer
+from .CalendarManager import CalendarManager
+from .SlotScorer import SlotScorer
 
 
 class AIScheduler:

@@ -1,6 +1,6 @@
 import datetime
-from src.scheduler.AIScheduler import AIScheduler
-from src.utils.parser import parse_args, parse_tasks
+from src.scheduler import AIScheduler
+from src.utils import parse_args, parse_tasks
 
 
 def run_cli():
